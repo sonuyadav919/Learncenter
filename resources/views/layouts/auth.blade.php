@@ -24,6 +24,8 @@
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('plugins/iCheck/square/blue.css')}}">
 
+    <link rel="stylesheet" href="{{asset('css/custom.css')}}">
+
     <style>
         .form-group {
             margin-right: 0px !important;
