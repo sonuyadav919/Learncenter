@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', ['user' => Auth::user()]);
 });
 
 Route::auth();
@@ -27,3 +27,5 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::controller('/dashboard', 'DashboardController');
+
+Route::controller('/profile', 'ProfileController');

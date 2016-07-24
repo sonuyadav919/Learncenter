@@ -7,28 +7,24 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Auth;
 
-class DashboardController extends Controller
+class ProfileController extends Controller
 {
-
 
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
-        $user = Auth::user();
+        $this->data['user'] = Auth::user();
 
-        $this->data['user'] = $user;
-
-        return view('dashboard.index', $this->data);
+        return view('profile.index', $this->data);
     }
 
     /**
