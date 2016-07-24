@@ -38,7 +38,7 @@
     </style>
 
 </head>
-<body class="hold-transition @if(Request::segment(1)=='login')login-page @elseif(Request::segment(1)=='register') register-page @endif">
+<body class="hold-transition @if(Request::segment(1)=='login' || Request::segment(1)=='password')login-page @elseif(Request::segment(1)=='register') register-page @endif">
 
     @yield('content')
 
