@@ -25,3 +25,5 @@ Route::post('/reg', 'HomeController@store');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+Route::controller('/dashboard', 'DashboardController');
