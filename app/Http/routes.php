@@ -29,3 +29,8 @@ Route::get('/home', 'HomeController@index');
 Route::controller('/dashboard', 'DashboardController');
 
 Route::controller('/profile', 'ProfileController');
+
+Route::group(['middleware' => 'auth'], function()
+{
+	Route::get('applogs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+});
