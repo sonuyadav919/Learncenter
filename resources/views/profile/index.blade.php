@@ -9,9 +9,9 @@
       User Profile
     </h1>
     <ol class="breadcrumb">
-      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-      <li><a href="#">Examples</a></li>
-      <li class="active">User profile</li>
+      <li><a href="{{url('/')}}"><i class="fa fa-dashboard"></i>Home</a></li>
+      <li><a href="{{url('dashboard')}}">Dashboard</a></li>
+      <li class="active">User Profile</li>
     </ol>
   </section>
 
@@ -26,7 +26,7 @@
           <div class="box-body box-profile">
             <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
 
-            <h3 class="profile-username text-center">Nina Mcintire</h3>
+            <h3 class="profile-username text-center">{{$user->name}}</h3>
 
             <p class="text-muted text-center">Software Engineer</p>
 
@@ -95,7 +95,7 @@
           <ul class="nav nav-tabs">
             <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
             <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-            <li><a href="#settings" data-toggle="tab">Settings</a></li>
+            <li><a href="#editprofile" data-toggle="tab">Edit Profile</a></li>
           </ul>
           <div class="tab-content">
             <div class="active tab-pane" id="activity">
@@ -309,55 +309,106 @@
             </div>
             <!-- /.tab-pane -->
 
-            <div class="tab-pane" id="settings">
-              <form class="form-horizontal">
+            <div class="tab-pane" id="editprofile">
+              <form class="form-horizontal" method="POST" action="{{url('profile/updateprofile')}}" >
+                {!! csrf_field() !!}
                 <div class="form-group">
                   <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputName" placeholder="Name">
+                    <input type="text" name="name" value="{{$user->name}}" class="form-control" id="inputName" placeholder="Name">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
                   <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    <input type="email" name="email" value="{{$user->email}}" class="form-control" id="inputEmail" placeholder="Email" disabled>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputName" class="col-sm-2 control-label">Name</label>
+                  <label for="inputName" class="col-sm-2 control-label">Country</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputName" placeholder="Name">
+                    <select class="form-control" name="country" id="selectCountry">
+                        <option value=""> -- Please Select --</option>
+                    </select>
                   </div>
                 </div>
+
                 <div class="form-group">
-                  <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+                  <label for="inputName" class="col-sm-2 control-label">State</label>
 
                   <div class="col-sm-10">
-                    <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                    <select class="form-control" name="state" id="selectState">
+                        <option value=""> -- Please Select --</option>
+                    </select>
                   </div>
                 </div>
+
                 <div class="form-group">
-                  <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+                  <label for="inputName" class="col-sm-2 control-label">City</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                    <select class="form-control" name="city" id="selectCity">
+                        <option value=""> -- Please Select --</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputName" class="col-sm-2 control-label">Education</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" name="education" class="form-control" id="inputName" placeholder="Education">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputName" class="col-sm-2 control-label">Profession</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" name="profile" class="form-control" id="inputName" placeholder="Occupation/Work Profile">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputName" class="col-sm-2 control-label">Skills</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" name="skills" class="form-control" id="userSkills" placeholder="Skills">
                   </div>
                 </div>
                 <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                      </label>
+                  <label for="inputExperience" class="col-sm-2 control-label">About</label>
+
+                  <div class="col-sm-10">
+                    <textarea class="form-control" rows="5" name="about" id="inputExperience" placeholder="About Me"></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputSkills" class="col-sm-2 control-label">Avatar</label>
+
+                  <div class="col-sm-10">
+                    <div class="col-sm-6" style="padding:0px;">
+                      <div class="image-crop">
+                          <img class="crop-img" src="img/p3.jpg">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="btn-group">
+                          <label title="Upload Image" for="inputImage" class="btn btn-primary">
+                              <input type="file" accept="image/*" name="avatar" id="inputImage" class="hide">
+                              Select Avatar
+                          </label>
+                      </div>
                     </div>
                   </div>
                 </div>
+
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-danger">Submit</button>
+                    <button type="submit" class="btn btn-danger">Update profile</button>
                   </div>
                 </div>
               </form>

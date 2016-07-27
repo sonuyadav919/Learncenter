@@ -1,3 +1,11 @@
 .login-box, .register-box {
     margin: 3% auto;
 }
+
+.crop-img img{
+  max-width: 100%;
+}
+
+.cropper-container {
+     position: sticky !important;
+}

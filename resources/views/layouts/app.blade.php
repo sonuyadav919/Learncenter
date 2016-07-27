@@ -40,6 +40,20 @@
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
+    <link rel="stylesheet" href="{{asset('css/custom.css')}}">
+
+
+    <script src="{{asset('js/jquery-2.1.1.js')}}"></script>
+
+    <!-- jQuery 2.2.3 -->
+    <script src="{{asset('plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+
+    <!-- Image Cropper -->
+    <link href="{{asset('plugins/cropper/cropper.min.css')}}" rel="stylesheet">
+    <script src="{{asset('plugins/cropper/cropper.min.js')}}"></script>
 
     <style>
         body {
@@ -75,19 +89,17 @@
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 
 
-    <!-- jQuery 2.2.3 -->
-    <script src="{{asset('plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
       $.widget.bridge('uibutton', $.ui.button);
     </script>
+
+
+    <script src="{{asset('js/cropper.js')}}"></script>
+
     <!-- Bootstrap 3.3.6 -->
     <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
-    <!-- Morris.js charts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="{{asset('plugins/morris/morris.min.js')}}"></script>
+
     <!-- Sparkline -->
     <script src="{{asset('plugins/sparkline/jquery.sparkline.min.js')}}"></script>
     <!-- jvectormap -->
@@ -109,7 +121,7 @@
     <!-- AdminLTE App -->
     <script src="{{asset('dist/js/app.min.js')}}"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{asset('dist/js/pages/dashboard.js')}}"></script>
+<!--    <script src="{{asset('dist/js/pages/dashboard.js')}}"></script> -->
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('dist/js/demo.js')}}"></script>
 
