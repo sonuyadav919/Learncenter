@@ -310,7 +310,7 @@
             <!-- /.tab-pane -->
 
             <div class="tab-pane" id="editprofile">
-              <form class="form-horizontal" method="POST" action="{{url('profile/updateprofile')}}" >
+              <form class="form-horizontal" method="POST" action="{{url('profile/updateprofile')}}" enctype="multipart/form-data">
                 {!! csrf_field() !!}
                 <div class="form-group">
                   <label for="inputName" class="col-sm-2 control-label">Name</label>
@@ -330,7 +330,7 @@
                   <label for="inputName" class="col-sm-2 control-label">Country</label>
 
                   <div class="col-sm-10">
-                    <select class="form-control" name="country" id="selectCountry">
+                    <select class="form-control" name="address[country]" id="selectCountry">
                         <option value=""> -- Please Select --</option>
                     </select>
                   </div>
@@ -340,7 +340,7 @@
                   <label for="inputName" class="col-sm-2 control-label">State</label>
 
                   <div class="col-sm-10">
-                    <select class="form-control" name="state" id="selectState">
+                    <select class="form-control" name="address[state]" id="selectState">
                         <option value=""> -- Please Select --</option>
                     </select>
                   </div>
@@ -350,7 +350,7 @@
                   <label for="inputName" class="col-sm-2 control-label">City</label>
 
                   <div class="col-sm-10">
-                    <select class="form-control" name="city" id="selectCity">
+                    <select class="form-control" name="address[city]" id="selectCity">
                         <option value=""> -- Please Select --</option>
                     </select>
                   </div>
@@ -390,17 +390,21 @@
                   <label for="inputSkills" class="col-sm-2 control-label">Avatar</label>
 
                   <div class="col-sm-10">
-                    <div class="col-sm-6" style="padding:0px;">
+                    <div class="col-sm-5" style="padding:0px;">
                       <div class="image-crop">
                           <img class="crop-img" src="img/p3.jpg">
                       </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                       <div class="btn-group">
                           <label title="Upload Image" for="inputImage" class="btn btn-primary">
                               <input type="file" accept="image/*" name="avatar" id="inputImage" class="hide">
                               Select Avatar
                           </label>
+                          <input type="hidden" name="crop_height" value="" id="crop_height">
+                          <input type="hidden" name="crop_width" value="" id="crop_width">
+                          <input type="hidden" name="crop_x" value="" id="crop_x">
+                          <input type="hidden" name="crop_y" value="" id="crop_y">
                       </div>
                     </div>
                   </div>

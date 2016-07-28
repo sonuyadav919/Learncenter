@@ -3,9 +3,5 @@
 }
 
 .crop-img img{
-  max-width: 100%;
-}
-
-.cropper-container {
-     position: sticky !important;
+  max-width: 250px;
 }
