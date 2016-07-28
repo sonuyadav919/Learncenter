@@ -24,7 +24,7 @@
         <!-- Profile Image -->
         <div class="box box-primary">
           <div class="box-body box-profile">
-            <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+            <img class="profile-user-img img-responsive img-circle" src="{{url('/uploads/avatar/'.$user->id.'/'.$user->avatar)}}" alt="User profile picture">
 
             <h3 class="profile-username text-center">{{$user->name}}</h3>
 
@@ -392,12 +392,12 @@
                   <div class="col-sm-10">
                     <div class="col-sm-5" style="padding:0px;">
                       <div class="image-crop">
-                          <img class="crop-img" src="img/p3.jpg">
+                          <img class="crop-img" src="{{url('/uploads/avatar/'.$user->id.'/'.$user->avatar)}}">
                       </div>
                     </div>
                     <div class="col-sm-7">
                       <div class="btn-group">
-                          <label title="Upload Image" for="inputImage" class="btn btn-primary">
+                          <label title="Upload Image" for="inputImage" id="cropperBtn" class="btn btn-primary">
                               <input type="file" accept="image/*" name="avatar" id="inputImage" class="hide">
                               Select Avatar
                           </label>

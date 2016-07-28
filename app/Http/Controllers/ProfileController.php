@@ -52,7 +52,7 @@ class ProfileController extends Controller
         if(!is_null($request->file('avatar')))
         {
                 $img = Image::make($_FILES['avatar']['tmp_name']);
-                $img->crop(round($request->crop_width),round($request->crop_width), round($request->crop_x),round($request->crop_y));
+                $img->crop(round($request->crop_height),round($request->crop_height), round($request->crop_x),round($request->crop_y));
                 $file = $request->file('avatar');
                 $destinationPath = base_path('/public/uploads/avatar/'.$user->id.'/');
                 $filename = $file->getClientOriginalName();
