@@ -49,7 +49,7 @@
       <label for="inputName" class="col-sm-2 control-label">Education</label>
 
       <div class="col-sm-10">
-        <input type="text" name="education" class="form-control" id="inputName" placeholder="Education">
+        <input type="text" name="education" value="{{$user->education}}" class="form-control" id="inputName" placeholder="Education">
       </div>
     </div>
 
@@ -57,7 +57,7 @@
       <label for="inputName" class="col-sm-2 control-label">Profession</label>
 
       <div class="col-sm-10">
-        <input type="text" name="profile" class="form-control" id="inputName" placeholder="Occupation/Work Profile">
+        <input type="text" name="profile" value="{{$user->profile}}" class="form-control" id="inputName" placeholder="Occupation/Work Profile">
       </div>
     </div>
 
@@ -65,14 +65,14 @@
       <label for="inputName" class="col-sm-2 control-label">Skills</label>
 
       <div class="col-sm-10">
-        <input type="text" name="skills" class="form-control" id="userSkills" placeholder="Skills">
+        <input type="text" name="skills" value="{{$user->skills}}" class="form-control" id="userSkills" placeholder="Skills">
       </div>
     </div>
     <div class="form-group">
       <label for="inputExperience" class="col-sm-2 control-label">About</label>
 
       <div class="col-sm-10">
-        <textarea class="form-control" rows="5" name="about" id="inputExperience" placeholder="About Me"></textarea>
+        <textarea class="form-control" rows="5" name="about" id="inputExperience" placeholder="About Me">{{$user->about}}</textarea>
       </div>
     </div>
     <div class="form-group">
