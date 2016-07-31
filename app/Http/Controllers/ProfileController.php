@@ -17,11 +17,7 @@ class ProfileController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function getIndex(Request $request)
     {
         $this->data['user'] = Auth::user();
@@ -29,11 +25,8 @@ class ProfileController extends Controller
         return view('profile.index', $this->data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function postUpdateprofile(Request $request)
     {
 
@@ -57,7 +50,7 @@ class ProfileController extends Controller
                 $destinationPath = base_path('/public/uploads/avatar/'.$user->id.'/');
                 $filename = $file->getClientOriginalName();
                 $extension = $file->getClientOriginalExtension(); //if you need extension of the file
-                $newfilename = \Session::get('uid').'.'.$extension;
+                $newfilename = str_random(10).'.'.$extension;
                 $uploadSuccess = $request->file('avatar')->move($destinationPath, $newfilename);
                 $img->save(base_path('/public/uploads/avatar/'.$user->id.'/'.$newfilename));
 
@@ -72,59 +65,27 @@ class ProfileController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function getCountries()
     {
-        //
+        $countries = \DB::table('countries')->get();
+
+        return $countries;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function getStates($countryId)
     {
-        //
+        $states = \DB::table('states')->where('country_id',$countryId)->get();
+
+        return $states;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function getCities($stateId)
     {
-        //
+        $states = \DB::table('cities')->where('state_id',$stateId)->get();
+
+        return $states;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

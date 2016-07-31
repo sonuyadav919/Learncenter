@@ -19,7 +19,7 @@
       <label for="inputName" class="col-sm-2 control-label">Country</label>
 
       <div class="col-sm-10">
-        <select class="form-control" name="address[country]" id="selectCountry">
+        <select class="select2" name="address[country]" id="selectCountry">
             <option value=""> -- Please Select --</option>
         </select>
       </div>
@@ -29,7 +29,7 @@
       <label for="inputName" class="col-sm-2 control-label">State</label>
 
       <div class="col-sm-10">
-        <select class="form-control" name="address[state]" id="selectState">
+        <select class="select2" name="address[state]" id="selectState">
             <option value=""> -- Please Select --</option>
         </select>
       </div>
@@ -39,7 +39,7 @@
       <label for="inputName" class="col-sm-2 control-label">City</label>
 
       <div class="col-sm-10">
-        <select class="form-control" name="address[city]" id="selectCity">
+        <select class="select2" name="address[city]" id="selectCity">
             <option value=""> -- Please Select --</option>
         </select>
       </div>
@@ -81,7 +81,7 @@
       <div class="col-sm-10">
         <div class="col-sm-5" style="padding:0px;">
           <div class="image-crop">
-              <img class="crop-img" src="{{url('/uploads/avatar/'.$user->id.'/'.$user->avatar)}}">
+              <img class="crop-img" src="{{url('/uploads/avatar/'.$user->id.'/'.$user->avatar)}}" alt="">
           </div>
         </div>
         <div class="col-sm-7">
@@ -107,3 +107,83 @@
   </form>
 </div>
 <!-- /.tab-pane -->
+
+{{--*/
+    if($user->address){
+        $address= json_decode($user->address,true);
+        $country = $address['country'];
+        $state = $address['state'];
+        $city = $address['city'];
+    }else{
+      $country = '';
+      $state = '';
+      $city = '';
+    }
+
+   /*--}}
+
+
+<script>
+
+$(document).ready(function(){
+
+  $.get('/profile/countries', function(data){
+      $.each(data, function(key, country){
+          if(country.id == '{{$country}}')
+              $('#selectCountry').append('<option value="'+country.id+'" selected>'+country.name+'</option>');
+          else
+              $('#selectCountry').append('<option value="'+country.id+'">'+country.name+'</option>');
+      });
+  });
+
+
+  if("{{$country}}" && "{{$state}}"){
+    var countryId = "{{$country}}";
+    $.get('/profile/states/'+countryId, function(data){
+        $('#selectState').html('');
+        $.each(data, function(key, state){
+            if(state.id == "{{$state}}")
+                $('#selectState').append('<option value="'+state.id+'" selected>'+state.name+'</option>');
+            else
+                $('#selectState').append('<option value="'+state.id+'">'+state.name+'</option>');
+        });
+    });
+  }
+
+  if("{{$country}}" && "{{$state}}" && "{{$city}}"){
+    var stateId = "{{$state}}";
+    $.get('/profile/cities/'+stateId, function(data){
+        $('#selectCity').html('');
+        $.each(data, function(key, city){
+            if(city.id == "{{$city}}")
+                $('#selectCity').append('<option value="'+city.id+'" selected>'+city.name+'</option>');
+            else
+                $('#selectCity').append('<option value="'+city.id+'">'+city.name+'</option>');
+        });
+    });
+  }
+
+
+  $('body').on('change', '#selectCountry', function(){
+      var countryId = $(this).val();
+      $.get('/profile/states/'+countryId, function(data){
+          $('#selectState').html('');
+          $.each(data, function(key, state){
+              $('#selectState').append('<option value="'+state.id+'">'+state.name+'</option>');
+          });
+      });
+  });
+
+  $('body').on('change', '#selectState', function(){
+      var stateId = $(this).val();
+      $.get('/profile/cities/'+stateId, function(data){
+          $('#selectCity').html('');
+          $.each(data, function(key, city){
+              $('#selectCity').append('<option value="'+city.id+'">'+city.name+'</option>');
+          });
+      });
+  });
+
+
+});
+</script>

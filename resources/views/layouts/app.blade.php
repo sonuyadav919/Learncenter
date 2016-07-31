@@ -41,6 +41,9 @@
     <link rel="stylesheet" href="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
+    
+    <!-- Select 2 -->
+    <link rel="stylesheet" href="{{asset('plugins/select2/select2.css')}}">
 
 
     <script src="{{asset('js/jquery-2.1.1.js')}}"></script>
@@ -125,6 +128,10 @@
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('dist/js/demo.js')}}"></script>
 
+    <!-- Select 2 -->
+    <script src="{{asset('plugins/select2/select2.min.js')}}"></script>
 
+
+    <script src="{{asset('js/app.js')}}"></script>
 </body>
 </html>
