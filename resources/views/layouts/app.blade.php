@@ -41,7 +41,9 @@
     <link rel="stylesheet" href="{{asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('css/custom.css')}}">
-    
+
+    @yield('extrastyle')
+
     <!-- Select 2 -->
     <link rel="stylesheet" href="{{asset('plugins/select2/select2.css')}}">
 
@@ -131,7 +133,10 @@
     <!-- Select 2 -->
     <script src="{{asset('plugins/select2/select2.min.js')}}"></script>
 
-
     <script src="{{asset('js/app.js')}}"></script>
+
+    @yield('extrascript')
+
+
 </body>
 </html>

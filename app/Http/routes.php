@@ -27,8 +27,8 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::controller('/dashboard', 'DashboardController');
-
 Route::controller('/profile', 'ProfileController');
+Route::controller('/notes', 'NotesController');
 
 Route::group(['middleware' => 'auth'], function()
 {

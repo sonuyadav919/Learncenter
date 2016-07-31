@@ -43,6 +43,16 @@
         </a>
       </li>
 
+      <li class="treeview @if(Request::segment(1) == 'notes') active @endif">
+        <a href="{{url('notes')}}">
+          <i class="fa fa-edit"></i> <span>Notes</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+      </li>
+
+
       <li class="treeview">
         <a href="#">
           <i class="fa fa-edit"></i> <span>Forms</span>
