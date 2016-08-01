@@ -5,6 +5,12 @@
 <link rel="stylesheet" type="text/css" href="{{asset('plugins/quill/quill.snow.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('plugins/quill/advanced.css')}}">
 @endsection
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/metisMenu/2.5.2/metisMenu.min.js"></script>
+
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -27,7 +33,7 @@
 
       <div class="box box-solid">
         <div class="box-header with-border">
-          <h3 class="box-title">Folders</h3>
+          <h3 class="box-title"><i class="fa fa-folder"></i> Folders</h3>
 
           <div class="box-tools">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -35,6 +41,38 @@
           </div>
         </div>
         <div class="box-body no-padding">
+
+          <ul class="nav nav-pills nav-stacked" id="menu">
+            <li class="active">
+              <a href="#" aria-expanded="true">Menu 1</a>
+              <ul aria-expanded="true" class="nav nav-pills nav-stacked">
+                <li class=""><a href="#"><i class="fa fa-folder"></i> Inbox
+                  <span class="label label-primary pull-right">12</span></a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
+                <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
+                <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
+                </li>
+                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" aria-expanded="false">Menu 2</a>
+              <ul aria-expanded="false" class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#"><i class="fa fa-folder"></i> Inbox
+                  <span class="label label-primary pull-right">12</span></a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
+                <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
+                <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
+                </li>
+                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+              </ul>
+            </li>
+
+            </ul>
+
+
+
+
           <ul class="nav nav-pills nav-stacked">
             <li class="active"><a href="#"><i class="fa fa-folder"></i> Inbox
               <span class="label label-primary pull-right">12</span></a></li>
@@ -47,6 +85,8 @@
         </div>
         <!-- /.box-body -->
       </div>
+
+
 
     </div>
     <!-- /.col -->
@@ -181,6 +221,7 @@
 <script>
   $(document).ready(function(){
 
+    $("#menu").metisMenu();
 
     $("#myNotes").keypress(function(){
         var html = advancedEditor.getHTML();
