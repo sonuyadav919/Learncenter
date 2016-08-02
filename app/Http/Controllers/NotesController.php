@@ -11,6 +11,11 @@ use Auth;
 class NotesController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function getIndex(Request $request)
     {
         $this->data['user'] = Auth::user();
