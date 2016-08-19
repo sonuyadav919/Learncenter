@@ -43,8 +43,8 @@
 
               <ul aria-expanded="true" class="nav nav-pills nav-stacked">
 
-                <li class=""><a href="#">&nbsp;
-                  <span class="pull-right text-warning "><i class="fa fa-plus"></i> Create File</span></a>
+                <li class=""> &nbsp;
+                  <a href="#" style="padding:0px 15px; margin-top:-49px;"><span class="pull-right label label-warning"><i class="fa fa-plus"></i> Create File</span></a>
                 </li>
 
                 <li class=""><a href="#"><i class="fa fa-folder"></i> Inbox
