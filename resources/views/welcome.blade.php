@@ -21,9 +21,11 @@
                 <li>
                     <a class="page-scroll" href="#services">Services</a>
                 </li>
+<!--                
                 <li>
                     <a class="page-scroll" href="#portfolio">Portfolio</a>
                 </li>
+-->
                 <li>
                     <a class="page-scroll" href="#contact">Contact</a>
                 </li>
@@ -117,7 +119,7 @@
         </div>
     </div>
 </section>
-
+<!--
 <section class="no-padding" id="portfolio">
     <div class="container-fluid">
         <div class="row no-gutter popup-gallery">
@@ -130,7 +132,7 @@
                                 Category
                             </div>
                             <div class="project-name">
-                                Project Name
+                                Online Tests
                             </div>
                         </div>
                     </div>
@@ -214,7 +216,7 @@
         </div>
     </div>
 </section>
-
+-->
 <aside class="bg-dark">
     <div class="container text-center">
         <div class="call-to-action">
@@ -234,11 +236,11 @@
             </div>
             <div class="col-lg-4 col-lg-offset-2 text-center">
                 <i class="fa fa-phone fa-3x sr-contact"></i>
-                <p>123-456-6789</p>
+                <p>+91-980-305-7421</p>
             </div>
             <div class="col-lg-4 text-center">
                 <i class="fa fa-envelope-o fa-3x sr-contact"></i>
-                <p><a href="mailto:your-email@your-domain.com">elearnonline@gmail.com</a></p>
+                <p><a href="mailto:support@elearnonline.tk">support@elearnonline.tk</a></p>
             </div>
         </div>
     </div>

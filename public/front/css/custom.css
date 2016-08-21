@@ -3,7 +3,7 @@
     font-size: 14px;
 }
 
-.navbar-default .nav > li.active > a, .navbar-default .nav > li.active > a:focus {
+.navbar-default .nav > li.active > a, .navbar-default .nav > li.active > a:focus > a:hover {
     background-color: transparent;
     color: #2e6da4 !important;
 }
