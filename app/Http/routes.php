@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/migrate', function () {
+    Artisan::call('migrate');
+});
+
 Route::get('/', function () {
     return view('welcome', ['user' => Auth::user()]);
 });
@@ -18,6 +22,7 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/notes/{fileid}', 'NotesController@getIndex');
 
 Route::get('/register', 'HomeController@create');
 Route::post('/reg', 'HomeController@store');

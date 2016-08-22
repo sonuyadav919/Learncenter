@@ -29,15 +29,36 @@
 <section class="content">
   <div class="row">
     <div class="col-md-3">
-      <a href="compose.html" class="btn btn-primary btn-block margin-bottom">Create Folder</a>
+      <a href="#" data-toggle="modal" data-target="#createFolder" class="btn btn-primary btn-block margin-bottom">Create Folder</a>
 
       <div class="box box-solid">
+        <!--
         <div class="box-header with-border">
           <h3 class="box-title"><i class="fa fa-folder"></i> Folders</h3>
         </div>
+      -->
         <div class="box-body no-padding">
 
           <ul class="nav nav-pills nav-stacked" id="menu">
+
+            @foreach($folderFiles as $folder)
+
+            <li class="active">
+              <a href="#" aria-expanded="true"><i class="fa fa-folder-o"></i> {{$folder['name']}}</a>
+
+              <ul aria-expanded="true" class="nav nav-pills nav-stacked">
+
+                <li class=""> &nbsp;
+                  <a href="#" style="padding:0px 15px; margin-top:-49px;"><span class="pull-right label label-warning" data-folder-id="{{$folder['id']}}" id="AddFileToFolder"><i class="fa fa-plus"></i> Create File</span></a>
+                </li>
+
+                <li class=""><a href="#"><i class="fa fa-file-text-o"></i> Drafts <span class="pull-right" onclick="alert('here');"><i class="fa fa-trash-o"></i></span> </a></li>
+
+              </ul>
+            </li>
+
+            @endforeach
+
             <li class="active">
               <a href="#" aria-expanded="true"><i class="fa fa-folder-o"></i> Test Folder</a>
 
@@ -47,27 +68,11 @@
                   <a href="#" style="padding:0px 15px; margin-top:-49px;"><span class="pull-right label label-warning"><i class="fa fa-plus"></i> Create File</span></a>
                 </li>
 
-                <li class=""><a href="#"><i class="fa fa-folder"></i> Inbox
-                  <span class="label label-primary pull-right">12</span></a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
-                <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-                <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
-                </li>
-                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+                <li class=""><a href="#"><i class="fa fa-file-text-o"></i> Drafts <span class="pull-right" onclick="alert('here');"><i class="fa fa-trash-o"></i></span> </a></li>
+
               </ul>
             </li>
-            <li>
-              <a href="#" aria-expanded="false">Menu 2</a>
-              <ul aria-expanded="false" class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#"><i class="fa fa-folder"></i> Inbox
-                  <span class="label label-primary pull-right">12</span></a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
-                <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-                <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
-                </li>
-                <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
-              </ul>
-            </li>
+
 
             </ul>
 
@@ -80,9 +85,21 @@
     </div>
     <!-- /.col -->
     <div class="col-md-9">
+      <input type="hidden" value="{{csrf_token()}}" id="token">
+      <input type="hidden" value="{{($activeNote)?$activeNote->id:''}}" id="fileId">
+
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Note Name</h3>
+
+
+
+          @if($new)
+          <div class="col-sm-5" style="padding:0px;">
+            <input type="text" name="name" class="form-control" value="{{$activeNote->name}}" id="fileName">
+          </div>
+          @else
+            <h3 class="box-title">{{($activeNote)?$activeNote->name:'Untitled File'}}</h3>
+          @endif
 
           <div class="box-tools pull-right">
             <div class="has-feedback">
@@ -185,9 +202,20 @@
                 <option value="center"></option>
                 <option value="right"></option>
                 <option value="justify"></option>
-              </select></span><span class="ql-format-group"><span title="Link" class="ql-format-button ql-link"></span><span class="ql-format-separator"></span><span title="Image" class="ql-format-button ql-image"></span><span class="ql-format-separator"></span><span title="List" class="ql-format-button ql-list"></span></span></div>
+              </select></span><span class="ql-format-group"><span title="Link" class="ql-format-button ql-link"></span><span class="ql-format-separator"></span><span title="Image" class="ql-format-button ql-image"></span><span class="ql-format-separator"></span><span title="List" class="ql-format-button ql-list"></span>
 
-              <div class="editor-container" id="myNotes" style="min-height:500px;"></div>
+              <span class="ql-format-separator">
+              <span class="font-size:18px;" id="saveButton"><span title="Save" class="fa fa-save fa-1x" style="margin-left:10px; margin-top: 0 !important; position: absolute;"></span></span>
+
+            </span></div>
+
+              <div class="editor-container" id="myNotes" style="min-height:500px;">
+
+                @if($activeNote)
+                {!!$activeNote->notes!!}
+                @endif
+
+              </div>
 
         </div>
       </div>
@@ -202,6 +230,40 @@
 </div>
 <!-- /.content-wrapper -->
 
+
+<!-- Modal -->
+<div id="createFolder" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create Folder</h4>
+      </div>
+      <form class="form-horizontal" method="POST" action="{{url('notes/savefolder')}}">
+        {!! csrf_field() !!}
+
+      <div class="modal-body">
+          <div class="form-group">
+            <label for="inputName" class="col-sm-12">Folder Name</label>
+
+            <div class="col-sm-12">
+              <input type="text" name="name" value="" class="form-control" id="inputName" placeholder="Folder Name" required>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </form>
+    </div>
+
+  </div>
+</div>
+
+
 @section('extrascript')
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
 <script type="text/javascript" src="{{asset('plugins/quill/quill.js')}}"></script>
@@ -214,9 +276,41 @@
 
     $("#myNotes").keypress(function(){
         var html = advancedEditor.getHTML();
+        var fileName = $('#fileName').val();
+        var fileId = $('#fileId').val();
+        var token = $('#token').val();
+
+        $.ajax({
+            url:'/notes/savenotes',
+            type:'post',
+            data:{'name':fileName, 'notes':html, '_token':token,'file_id':fileId},
+            success:function(data){}
+        });
     });
 
+    $('body').on('click', '#saveButton', function(){
+      var html = advancedEditor.getHTML();
+      var fileName = $('#fileName').val();
+      var fileId = $('#fileId').val();
+      var token = $('#token').val();
+
+      $.ajax({
+          url:'/notes/savenotes',
+          type:'post',
+          data:{'name':fileName, 'notes':html, '_token':token,'file_id':fileId},
+          success:function(data){}
+      });
+    });
+
+
   });
+
+  $('body').on('click', '#AddFileToFolder', function(){
+      var folder = $(this).attr('data-folder-id');
+      window.location = 'notes/savefile/'+folder;
+  });
+
+
 </script>
 
 @endsection
