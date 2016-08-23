@@ -51,8 +51,9 @@
                 <li class=""> &nbsp;
                   <a href="#" style="padding:0px 15px; margin-top:-49px;"><span class="pull-right label label-warning" data-folder-id="{{$folder['id']}}" id="AddFileToFolder"><i class="fa fa-plus"></i> Create File</span></a>
                 </li>
-
-                <li class=""><a href="#"><i class="fa fa-file-text-o"></i> Drafts <span class="pull-right" onclick="alert('here');"><i class="fa fa-trash-o"></i></span> </a></li>
+                @foreach($folder['files'] as $file)
+                <li class=""><a href="{{url('notes/'.base64_encode($file['id']))}}"><i class="fa fa-file-text-o"></i> {{$file['name']}} <span class="pull-right" onclick="alert('here');"><i class="fa fa-trash-o"></i></span> </a></li>
+                @endforeach
 
               </ul>
             </li>
