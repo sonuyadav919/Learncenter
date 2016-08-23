@@ -37,6 +37,27 @@ class NotesController extends Controller
         return Redirect::to('notes/'.base64_encode($note['id']).'?new');
     }
 
+
+    public function postSavenotes(Request $request)
+    {
+        $data = $request->all();
+        $data['user_id'] = Auth::id();
+        $fileId = $data['file_id'];
+        unset($data['file_id']);
+
+        Note::find($fileId)->update($data);
+
+        return 'success';
+    }
+
+    public function getDeletefile($fileId)
+    {
+        Note::find($fileId)->delete();
+
+        return Redirect::back();
+    }
+
+
     private function getFolderAndFiles($userId)
     {
         $folders = NotesFolder::where('user_id', $userId)->get()->toArray();

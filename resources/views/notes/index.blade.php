@@ -32,18 +32,18 @@
       <a href="#" data-toggle="modal" data-target="#createFolder" class="btn btn-primary btn-block margin-bottom">Create Folder</a>
 
       <div class="box box-solid">
-        <!--
+
         <div class="box-header with-border">
-          <h3 class="box-title"><i class="fa fa-folder"></i> Folders</h3>
+          <h3 class="box-title"><i class="fa fa-folder-o"></i> My Files</h3>
         </div>
-      -->
+
         <div class="box-body no-padding">
 
           <ul class="nav nav-pills nav-stacked" id="menu">
 
             @foreach($folderFiles as $folder)
 
-            <li class="active">
+            <li @if($activeNote && $activeNote->folder_id == $folder['id']) class="active" @endif>
               <a href="#" aria-expanded="true"><i class="fa fa-folder-o"></i> {{$folder['name']}}</a>
 
               <ul aria-expanded="true" class="nav nav-pills nav-stacked">
@@ -52,28 +52,13 @@
                   <a href="#" style="padding:0px 15px; margin-top:-49px;"><span class="pull-right label label-warning" data-folder-id="{{$folder['id']}}" id="AddFileToFolder"><i class="fa fa-plus"></i> Create File</span></a>
                 </li>
                 @foreach($folder['files'] as $file)
-                <li class=""><a href="{{url('notes/'.base64_encode($file['id']))}}"><i class="fa fa-file-text-o"></i> {{$file['name']}} <span class="pull-right" onclick="alert('here');"><i class="fa fa-trash-o"></i></span> </a></li>
+                <li @if($activeNote && $activeNote->id == $file['id']) class="active" @endif><a href="{{url('notes/'.base64_encode($file['id']))}}"><i class="fa fa-file-text-o"></i> {{$file['name']}} <span class="pull-right" onClick="deletefile({{$file['id']}}); return false;" id="deleteFiles"><i class="fa fa-trash-o"></i></span> </a></li>
                 @endforeach
 
               </ul>
             </li>
 
             @endforeach
-
-            <li class="active">
-              <a href="#" aria-expanded="true"><i class="fa fa-folder-o"></i> Test Folder</a>
-
-              <ul aria-expanded="true" class="nav nav-pills nav-stacked">
-
-                <li class=""> &nbsp;
-                  <a href="#" style="padding:0px 15px; margin-top:-49px;"><span class="pull-right label label-warning"><i class="fa fa-plus"></i> Create File</span></a>
-                </li>
-
-                <li class=""><a href="#"><i class="fa fa-file-text-o"></i> Drafts <span class="pull-right" onclick="alert('here');"><i class="fa fa-trash-o"></i></span> </a></li>
-
-              </ul>
-            </li>
-
 
             </ul>
 
@@ -310,6 +295,14 @@
       var folder = $(this).attr('data-folder-id');
       window.location = 'notes/savefile/'+folder;
   });
+
+
+  function deletefile(fileId){
+      if(confirm('Are you sure?')){
+        window.location = '/notes/deletefile/'+fileId;
+      }
+      return false;
+  }
 
 
 </script>
