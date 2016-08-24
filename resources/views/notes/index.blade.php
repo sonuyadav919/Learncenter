@@ -191,7 +191,7 @@
               </select></span><span class="ql-format-group"><span title="Link" class="ql-format-button ql-link"></span><span class="ql-format-separator"></span><span title="Image" class="ql-format-button ql-image"></span><span class="ql-format-separator"></span><span title="List" class="ql-format-button ql-list"></span>
 
               <span class="ql-format-separator">
-              <span style="font-size:17px; cursor: pointer;" id="saveButton"><span title="Save" class="fa fa-save fa-1x" style="margin-left:10px; margin-top: -2 !important; position: absolute;"></span></span>
+              <span style="font-size:17px; cursor: pointer;" id="saveButton" class="text-success"><span title="Save" class="fa fa-save fa-1x" style="margin-left:10px; margin-top: -2px !important; position: absolute;"></span></span>
 
             </span></div>
 
