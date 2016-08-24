@@ -52,7 +52,7 @@
                   <a href="#" style="padding:0px 15px; margin-top:-49px;"><span class="pull-right label label-warning" data-folder-id="{{$folder['id']}}" id="AddFileToFolder"><i class="fa fa-plus"></i> Create File</span></a>
                 </li>
                 @foreach($folder['files'] as $file)
-                <li @if($activeNote && $activeNote->id == $file['id']) class="active" @endif><a href="{{url('notes/'.base64_encode($file['id']))}}"><i class="fa fa-file-text-o"></i> {{$file['name']}} <span class="pull-right" onClick="deletefile({{$file['id']}}); return false;" id="deleteFiles"><i class="fa fa-trash-o"></i></span> </a></li>
+                <li @if($activeNote && $activeNote->id == $file['id']) class="active" @endif><a href="{{url('notes/'.base64_encode($file['id']))}}"><i class="fa fa-file-text-o"></i> <span class="renamefile{{$file['id']}}"> {{$file['name']}} </span> <span class="pull-right" onClick="deletefile({{$file['id']}}); return false;" id="deleteFiles"><i class="fa fa-trash-o"></i></span> </a></li>
                 @endforeach
 
               </ul>
@@ -81,7 +81,7 @@
 
           @if($new)
           <div class="col-sm-5" style="padding:0px;">
-            <input type="text" name="name" class="form-control" value="{{$activeNote->name}}" id="fileName">
+            <input type="text" name="name" class="form-control" value="{{$activeNote->name}}" id="fileName" data-file-class="renamefile{{$activeNote->id}}">
           </div>
           @else
             <h3 class="box-title">{{($activeNote)?$activeNote->name:'Untitled File'}}</h3>
@@ -191,7 +191,7 @@
               </select></span><span class="ql-format-group"><span title="Link" class="ql-format-button ql-link"></span><span class="ql-format-separator"></span><span title="Image" class="ql-format-button ql-image"></span><span class="ql-format-separator"></span><span title="List" class="ql-format-button ql-list"></span>
 
               <span class="ql-format-separator">
-              <span class="font-size:18px;" id="saveButton"><span title="Save" class="fa fa-save fa-1x" style="margin-left:10px; margin-top: 0 !important; position: absolute;"></span></span>
+              <span style="font-size:17px; cursor: pointer;" id="saveButton"><span title="Save" class="fa fa-save fa-1x" style="margin-left:10px; margin-top: -2 !important; position: absolute;"></span></span>
 
             </span></div>
 
@@ -227,7 +227,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Create Folder</h4>
       </div>
-      <form class="form-horizontal" method="POST" action="{{url('notes/savefolder')}}">
+      <form class="form-horizontal" method="POST" action="{{url('/notes/savefolder')}}">
         {!! csrf_field() !!}
 
       <div class="modal-body">
@@ -274,6 +274,8 @@
         });
     });
 
+
+
     $('body').on('click', '#saveButton', function(){
       var html = advancedEditor.getHTML();
       var fileName = $('#fileName').val();
@@ -289,13 +291,31 @@
     });
 
 
+    $("#fileName").keypress(function(){
+        var fileName = $('#fileName').val();
+        var changeNameClass = $(this).attr('data-file-class');
+        var fileId = $('#fileId').val();
+        var token = $('#token').val();
+        $('.'+changeNameClass).html(fileName);
+
+        $.ajax({
+            url:'/notes/renamefile',
+            type:'post',
+            data:{'name':fileName, '_token':token,'file_id':fileId},
+            success:function(data){
+
+            }
+        });
+    });
+
+
+
   });
 
   $('body').on('click', '#AddFileToFolder', function(){
       var folder = $(this).attr('data-folder-id');
-      window.location = 'notes/savefile/'+folder;
+      window.location = '/notes/savefile/'+folder;
   });
-
 
   function deletefile(fileId){
       if(confirm('Are you sure?')){

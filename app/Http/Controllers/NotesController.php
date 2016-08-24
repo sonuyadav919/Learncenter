@@ -50,9 +50,31 @@ class NotesController extends Controller
         return 'success';
     }
 
+    public function postRenamefile(Request $request)
+    {
+        $data = $request->all();
+        $data['user_id'] = Auth::id();
+        $fileId = $data['file_id'];
+        unset($data['file_id']);
+
+        Note::find($fileId)->update($data);
+
+        return 'success';
+    }
+
     public function getDeletefile($fileId)
     {
         Note::find($fileId)->delete();
+
+        return Redirect::back();
+    }
+
+    public function postSavefolder(Request $request)
+    {
+        $data = $request->all();
+        $data['user_id'] = Auth::id();
+
+        NotesFolder::create($data);
 
         return Redirect::back();
     }
