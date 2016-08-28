@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
-Route::get('/notes/{fileid}', 'NotesController@getIndex');
+
 
 Route::get('/register', 'HomeController@create');
 Route::post('/reg', 'HomeController@store');
@@ -33,7 +33,11 @@ Route::get('/home', 'HomeController@index');
 
 Route::controller('/dashboard', 'DashboardController');
 Route::controller('/profile', 'ProfileController');
+Route::get('/notes/searchfile', 'NotesController@getSearchfile');
+Route::get('/notes/{fileid}', 'NotesController@getIndex');
 Route::controller('/notes', 'NotesController');
+
+
 
 Route::group(['middleware' => 'auth'], function()
 {

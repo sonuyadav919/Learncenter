@@ -80,6 +80,20 @@ class NotesController extends Controller
     }
 
 
+    public function getSearchfile(Request $request)
+    {
+        $search = $request->search;
+
+        $result = NotesFolder::join('notes', 'notes.folder_id', '=', 'notes_folder.id')
+                                ->where('notes.name', 'LIKE', '%'.$search.'%')
+                                ->orWhere('notes_folder.name', 'LIKE', '%'.$search.'%')
+                                ->select('notes.*', 'notes_folder.name as folder_name')
+                                ->get();
+
+        return $result;
+
+    }
+
     private function getFolderAndFiles($userId)
     {
         $folders = NotesFolder::where('user_id', $userId)->get()->toArray();

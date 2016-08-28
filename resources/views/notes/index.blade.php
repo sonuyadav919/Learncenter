@@ -75,7 +75,7 @@
       <input type="hidden" value="{{($activeNote)?$activeNote->id:''}}" id="fileId">
 
       <div class="box box-primary">
-        <div class="box-header with-border">
+        <div class="box-header with-border" style="min-height:65px; height:auto !important;">
 
 
 
@@ -84,19 +84,27 @@
             <input type="text" name="name" class="form-control" value="{{$activeNote->name}}" id="fileName" data-file-class="renamefile{{$activeNote->id}}">
           </div>
           @else
-            <h3 class="box-title">{{($activeNote)?$activeNote->name:'Untitled File'}}</h3>
+            <h3 class="box-title">{{($activeNote)?$activeNote->name:''}}</h3>
           @endif
 
           <div class="box-tools pull-right">
-            <div class="has-feedback">
-              <input type="text" class="form-control input-sm" placeholder="Search Notes">
-              <span class="glyphicon glyphicon-search form-control-feedback"></span>
-            </div>
+
+            <!--<form action="">-->
+            <div class="input-group margin">
+                <input type="text" class="form-control" name="search" id="searchBox">
+                    <span class="input-group-btn">
+                      <button class="btn btn-primary btn-flat" type="submit" >Go!</button>
+                    </span>
+              </div>
+            <!--</form> -->
           </div>
           <!-- /.box-tools -->
         </div>
         <!-- /.box-header -->
         <div class="box-body no-padding" id="content-container">
+
+          <div id="editorContent">
+          @if($activeNote)
           <div class="toolbar-container"><span class="ql-format-group">
               <select title="Font" class="ql-font">
                 <option value="sans-serif" selected>Sans Serif</option>
@@ -203,6 +211,18 @@
 
               </div>
 
+          @else
+
+          @endif
+        </div>
+
+          <div id="searchResult" class="box-body table-responsive no-padding" style="display:none;">
+            <table class="table table-hover" id="searchTable">
+
+            </table>
+
+          </div>
+
         </div>
       </div>
       <!-- /. box -->
@@ -286,7 +306,9 @@
           url:'/notes/savenotes',
           type:'post',
           data:{'name':fileName, 'notes':html, '_token':token,'file_id':fileId},
-          success:function(data){}
+          success:function(data){
+            location.reload();
+          }
       });
     });
 
@@ -309,6 +331,34 @@
     });
 
 
+    $("#searchBox").keypress(function(){
+        var search = $('#searchBox').val();
+        var token = $('#token').val();
+
+      if(search){
+        $.ajax({
+              url:'/notes/searchfile',
+              type:'get',
+              data:{'search':search, '_token':token},
+              success:function(data){
+                $('#searchResult').show();
+                $('#editorContent').hide();
+
+                $('#searchTable').html('');
+                $('#searchTable').append('<tr><th>#</th><th>File Name</th><th>Folder Name</th><th>Created Date</th><th>Last Updated</th><th>Action</th></tr>');
+
+                $.each(data, function(key, value){
+                    $('#searchTable').append('<tr><td>'+ ++key +'</td><td>'+value.name+'</td><td>'+value.folder_name+'</td><td>'+value.created_at+'</td><td>'+value.updated_at+'</td><td><a href="/notes/'+btoa(value.id)+'" class="btn btn-sm btn-primary">View File</a></td></tr>');              })
+
+              }
+          });
+      }else{
+        $('#editorContent').show();
+        $('#searchResult').hide();
+      }
+    });
+
+
 
   });
 
@@ -323,6 +373,8 @@
       }
       return false;
   }
+
+
 
 
 </script>
