@@ -280,7 +280,7 @@
 
     $("#menu").metisMenu();
 
-    $("#myNotes").keypress(function(){
+    $("#myNotes").keyup(function(){
         var html = advancedEditor.getHTML();
         var fileName = $('#fileName').val();
         var fileId = $('#fileId').val();
@@ -313,7 +313,7 @@
     });
 
 
-    $("#fileName").keypress(function(){
+    $("#fileName").keyup(function(){
         var fileName = $('#fileName').val();
         var changeNameClass = $(this).attr('data-file-class');
         var fileId = $('#fileId').val();
@@ -331,7 +331,7 @@
     });
 
 
-    $("#searchBox").keypress(function(){
+    $("#searchBox").keyup(function(){
         var search = $('#searchBox').val();
         var token = $('#token').val();
 
