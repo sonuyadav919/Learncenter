@@ -109,15 +109,15 @@
 
 
             <!--<form action="">-->
-            <div class="input-group margin">
+            <div class=" input-group margin">
               <div class="search">
-                <input type="text" class="form-control" name="search" id="searchBox" placeholder="Search">
-                <ul class="search-ac">
-                  <li><a href="index.html">Search Result #1<br><span>Description...</span></a></li>
-                  <li><a href="index.html">Search Result #2<br><span>Description...</span></a></li>
-                  <li><a href="index.html">Search Result #3<br><span>Description...</span></a></li>
-                  <li><a href="index.html">Search Result #4</a></li>
-                </ul>
+
+                <form class="search">
+                  <input type="search" name="search" id="searchBox" placeholder="Search...">
+                  <ul class="search-ac" id="searchResult">
+
+                  </ul>
+                </form>
               </div>
                 <!--
                     <span class="input-group-btn">
@@ -244,13 +244,13 @@
 
           @endif
         </div>
-
+<!--
           <div id="searchResult" class="box-body table-responsive no-padding" style="display:none;">
             <table class="table table-hover" id="searchTable">
 
             </table>
 
-          </div>
+          </div> -->
 
         </div>
       </div>
@@ -370,15 +370,16 @@
               type:'get',
               data:{'search':search, '_token':token},
               success:function(data){
-                $('#searchResult').show();
-                $('#editorContent').hide();
+              //  $('#searchResult').show();
+              //  $('#editorContent').hide();
 
-                $('#searchTable').html('');
-                $('#searchTable').append('<tr><th>#</th><th>File Name</th><th>Folder Name</th><th>Created Date</th><th>Last Updated</th><th>Action</th></tr>');
+            //    $('#searchTable').html('');
+          //      $('#searchTable').append('<tr><th>#</th><th>File Name</th><th>Folder Name</th><th>Created Date</th><th>Last Updated</th><th>Action</th></tr>');
 
                 $.each(data, function(key, value){
-                    $('#searchTable').append('<tr><td>'+ ++key +'</td><td>'+value.name+'</td><td>'+value.folder_name+'</td><td>'+value.created_at+'</td><td>'+value.updated_at+'</td><td><a href="/notes/'+btoa(value.id)+'" class="btn btn-sm btn-primary">View File</a></td></tr>');              })
+                  //  $('#searchTable').append('<tr><td>'+ ++key +'</td><td>'+value.name+'</td><td>'+value.folder_name+'</td><td>'+value.created_at+'</td><td>'+value.updated_at+'</td><td><a href="/notes/'+btoa(value.id)+'" class="btn btn-sm btn-primary">View File</a></td></tr>');              })
 
+                  $('#searchResult').append('<li><a href="/notes/'+btoa(value.id)+'">'+value.name+'<br><span>'+value.created_at+'</span></a></li>');
               }
           });
       }else{
