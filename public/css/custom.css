@@ -14,3 +14,7 @@
 .cropper-container {
     position: sticky !important;
 }
+
+.box-tools{
+	width:35%;
+}
