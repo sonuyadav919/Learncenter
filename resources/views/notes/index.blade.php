@@ -89,12 +89,41 @@
 
           <div class="box-tools pull-right">
 
+
+<!--
+
+<section class="container">
+  <form class="search" method="post" action="index.html">
+    <input type="search" name="q" placeholder="Search..." autocomplete="off">
+    <ul class="search-ac">
+      <li><a href="index.html">Search Result #1<br><span>Description...</span></a></li>
+      <li><a href="index.html">Search Result #2<br><span>Description...</span></a></li>
+      <li><a href="index.html">Search Result #3<br><span>Description...</span></a></li>
+      <li><a href="index.html">Search Result #4</a></li>
+    </ul>
+  </form>
+</section>
+
+
+-->
+
+
             <!--<form action="">-->
             <div class="input-group margin">
-                <input type="text" class="form-control" name="search" id="searchBox">
+              <div class="search">
+                <input type="text" class="form-control" name="search" id="searchBox" placeholder="Search">
+                <ul class="search-ac">
+                  <li><a href="index.html">Search Result #1<br><span>Description...</span></a></li>
+                  <li><a href="index.html">Search Result #2<br><span>Description...</span></a></li>
+                  <li><a href="index.html">Search Result #3<br><span>Description...</span></a></li>
+                  <li><a href="index.html">Search Result #4</a></li>
+                </ul>
+              </div>
+                <!--
                     <span class="input-group-btn">
                       <button class="btn btn-primary btn-flat" type="submit" >Go!</button>
                     </span>
+                  -->
               </div>
             <!--</form> -->
           </div>
