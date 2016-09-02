@@ -75,57 +75,26 @@
       <input type="hidden" value="{{($activeNote)?$activeNote->id:''}}" id="fileId">
 
       <div class="box box-primary">
-        <div class="box-header with-border" style="min-height:65px; height:auto !important;">
+        <div class="box-header with-border" >
 
 
-
+        <div class="col-sm-7" style="padding:0px; padding-right:20px;">
           @if($new)
-          <div class="col-sm-5" style="padding:0px;">
             <input type="text" name="name" class="form-control" value="{{$activeNote->name}}" id="fileName" data-file-class="renamefile{{$activeNote->id}}">
-          </div>
           @else
             <h3 class="box-title">{{($activeNote)?$activeNote->name:''}}</h3>
           @endif
 
-          <div class="box-tools pull-right">
+        </div>
 
-
-<!--
-
-<section class="container">
-  <form class="search" method="post" action="index.html">
-    <input type="search" name="q" placeholder="Search..." autocomplete="off">
-    <ul class="search-ac">
-      <li><a href="index.html">Search Result #1<br><span>Description...</span></a></li>
-      <li><a href="index.html">Search Result #2<br><span>Description...</span></a></li>
-      <li><a href="index.html">Search Result #3<br><span>Description...</span></a></li>
-      <li><a href="index.html">Search Result #4</a></li>
-    </ul>
-  </form>
-</section>
-
-
--->
-
-
-            <!--<form action="">-->
-            <div class=" input-group margin">
-              <div class="search">
-
+          <div class="col-sm-5 pull-right">
                 <form class="search">
                   <input type="search" name="search" id="searchBox" placeholder="Search...">
                   <ul class="search-ac" id="searchResult">
 
                   </ul>
                 </form>
-              </div>
-                <!--
-                    <span class="input-group-btn">
-                      <button class="btn btn-primary btn-flat" type="submit" >Go!</button>
-                    </span>
-                  -->
-              </div>
-            <!--</form> -->
+
           </div>
           <!-- /.box-tools -->
         </div>
@@ -376,22 +345,14 @@
               data:{'search':search, '_token':token},
               success:function(data){
                 $('#searchResult').show();
-              //  $('#editorContent').hide();
-
-            //    $('#searchTable').html('');
-          //      $('#searchTable').append('<tr><th>#</th><th>File Name</th><th>Folder Name</th><th>Created Date</th><th>Last Updated</th><th>Action</th></tr>');
-
+                $('#searchResult').html('');
                 $.each(data, function(key, value){
-                  //  $('#searchTable').append('<tr><td>'+ ++key +'</td><td>'+value.name+'</td><td>'+value.folder_name+'</td><td>'+value.created_at+'</td><td>'+value.updated_at+'</td><td><a href="/notes/'+btoa(value.id)+'" class="btn btn-sm btn-primary">View File</a></td></tr>');
-                  $('#searchResult').html('');
                   $('#searchResult').append('<li><a href="/notes/'+btoa(value.id)+'">'+value.name+'<br><span>'+value.created_at+'</span></a></li>');
                 });
-
 
               }
           });
       }else{
-    //    $('#editorContent').show();
         $('#searchResult').hide();
       }
     });
