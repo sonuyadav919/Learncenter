@@ -16,7 +16,10 @@ Route::get('/migrate', function () {
 });
 
 Route::get('/', function () {
-    return view('welcome', ['user' => Auth::user()]);
+    if(Auth::id())
+      return Redirect::to('dashboard');
+    else
+      return view('welcome', ['user' => Auth::user()]);
 });
 
 Route::auth();
