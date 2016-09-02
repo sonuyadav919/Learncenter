@@ -360,6 +360,11 @@
     });
 
 
+  $("#searchBox").focus(function(){
+      $('#searchResult').hide();
+  });
+
+
     $("#searchBox").keyup(function(){
         var search = $('#searchBox').val();
         var token = $('#token').val();
@@ -370,20 +375,23 @@
               type:'get',
               data:{'search':search, '_token':token},
               success:function(data){
-              //  $('#searchResult').show();
+                $('#searchResult').show();
               //  $('#editorContent').hide();
 
             //    $('#searchTable').html('');
           //      $('#searchTable').append('<tr><th>#</th><th>File Name</th><th>Folder Name</th><th>Created Date</th><th>Last Updated</th><th>Action</th></tr>');
 
                 $.each(data, function(key, value){
-                  //  $('#searchTable').append('<tr><td>'+ ++key +'</td><td>'+value.name+'</td><td>'+value.folder_name+'</td><td>'+value.created_at+'</td><td>'+value.updated_at+'</td><td><a href="/notes/'+btoa(value.id)+'" class="btn btn-sm btn-primary">View File</a></td></tr>');              })
-
+                  //  $('#searchTable').append('<tr><td>'+ ++key +'</td><td>'+value.name+'</td><td>'+value.folder_name+'</td><td>'+value.created_at+'</td><td>'+value.updated_at+'</td><td><a href="/notes/'+btoa(value.id)+'" class="btn btn-sm btn-primary">View File</a></td></tr>');
+                  $('#searchResult').html('');
                   $('#searchResult').append('<li><a href="/notes/'+btoa(value.id)+'">'+value.name+'<br><span>'+value.created_at+'</span></a></li>');
+                });
+
+
               }
           });
       }else{
-        $('#editorContent').show();
+    //    $('#editorContent').show();
         $('#searchResult').hide();
       }
     });
