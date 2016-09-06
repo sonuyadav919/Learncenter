@@ -66,7 +66,7 @@ class NotesController extends Controller
     {
         Note::find($fileId)->delete();
 
-        return Redirect::back();
+        return Redirect::to('notes');
     }
 
     public function postSavefolder(Request $request)
