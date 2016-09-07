@@ -64,6 +64,12 @@
     <link href="/plugins/cropper/cropper.min.css" rel="stylesheet">
     <script src="/plugins/cropper/cropper.min.js"></script>
 
+
+    <!-- Toastr  Notification-->
+    <script type="text/javascript" src="/plugins/toastr/toastr.js"></script>
+    <link href="/plugins/toastr/toastr.css" rel="stylesheet">
+
+
     <style>
         body {
             font-family: 'Lato';
@@ -141,6 +147,6 @@
 
     @yield('extrascript')
 
-
+    {{ Sitehelpers::showNotification() }}
 </body>
 </html>

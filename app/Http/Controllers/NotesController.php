@@ -66,7 +66,7 @@ class NotesController extends Controller
     {
         Note::find($fileId)->delete();
 
-        return Redirect::to('notes');
+        return Redirect::to('notes')->with('messagetext', 'Successfully Deleted!')->with('msgstatus','success');
     }
 
     public function postSavefolder(Request $request)
